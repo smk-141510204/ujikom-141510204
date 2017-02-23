@@ -129,22 +129,18 @@ class lemburpegawaiController extends Controller
         $lembur=Lembur_pegawai::where('id',$id)->first();
         if($lembur['kode_lembur_id'] != Request('kode_lembur_id')){
             $roles=[
-            'kode_lembur_id'=>'required',
-            'pegawai_id'=>'required',
+        
             'Jumlah_jam'=>'required',
         ];
         }
         else{
             $roles=[
-            'kode_lembur_id'=>'required|unique:lembur_pegawais',
-            'pegawai_id'=>'required',
+            
             'Jumlah_jam'=>'required',
         ];
         }
         $sms=[
-            'kode_lembur_id.required'=>'jangan kosong',
-            'kode_lembur_id.unique'=>'jangan sama',
-            'pegawai_id.required'=>'jangan kosong',
+            
             'Jumlah_jam.required'=>'jangan kosong',
         ];
         $validasi=Validator::make(Input::all(),$roles,$sms);

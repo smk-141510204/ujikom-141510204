@@ -81,7 +81,7 @@ class PenggajianController extends Controller
         // dd($wheretunjangan);
         $wherepegawai=Pegawai::where('id',$where->pegawai_id)->first();
         // dd($wherepegawai);
-        $wherekategori_lembur=Kategori_lembur::where('jabatan_id',$wherepegawai->jabatan_id)->where('golongan_id',$wherepegawai->golongan_id)->first();
+        $wherekategorilembur=Kategori_lembur::where('jabatan_id',$wherepegawai->jabatan_id)->where('golongan_id',$wherepegawai->golongan_id)->first();
          // dd($wherekategori_lembur);
         $wherelemburpegawai=Lembur_pegawai::where('pegawai_id',$wherepegawai->id)->first();
         // dd($wherelemburpegawai);
@@ -127,7 +127,7 @@ class PenggajianController extends Controller
             $penggajian->gaji_pokok=$wherejabatan->besar_uang+$wheregolongan->besar_uang;
             $penggajian->total_gaji=($wherelemburpegawai->Jumlah_jam*$wherekategorilembur->besar_uang)+($wheretunjangan->besar_uang)+($wherejabatan->besar_uang+$wheregolongan->besar_uang);
             $penggajian->tanggal_pengambilan =date('d-m-y');
-            $penggajian->id_tunjangan_pegawai=Input::get('id_tunjangan_pegawai');
+            $penggajian->tunjangan_pegawai_id=Input::get('tunjangan_pegawai_id');
             $penggajian->status_pengambilan=0 ;
             $penggajian->petugas_penerima=auth::user()->name ;
             $penggajian->save();
@@ -156,6 +156,16 @@ class PenggajianController extends Controller
     public function edit($id)
     {
         //
+        $gaji=Penggajian::find($id);
+
+        $penggajian=new Penggajian ;
+
+        $penggajian=array('status_pengambilan'=>1,'tanggal_pengambilan'=>date('y-m-d'));
+
+        Penggajian::where('id',$id)->update($penggajian);
+
+        return redirect('penggajian');
+
     }
 
     /**

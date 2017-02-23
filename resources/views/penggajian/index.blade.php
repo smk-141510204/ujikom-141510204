@@ -26,19 +26,45 @@
                         
                         <td>{{$penggajians->Tunjangan_pegawai->Pegawai->nip}}</td>
                         <td><b>@if($penggajians->tanggal_pengambilan == ""&&$penggajians->status_pengambilan == "0")
-                            Gaji Belum Diambil
+
+                        Gaji Belum Diambil
+
+                                <div >
+
+                                    <a class="btn btn-primary" href="{{route('penggajian.edit',$penggajians->id)}}">Ubah Pengambilan</a>
+
+                                </div>
+
+                            
+
                         @elseif($penggajians->tanggal_pengambilan == ""||$penggajians->status_pengambilan == "0")
+
                             Gaji Belum Diambil
+
+                           
                         @else
+
                             Gaji Sudah Diambil Pada {{$penggajians->tanggal_pengambilan}}
+
                         @endif</b></td>
 
 
+
+
+
                         </h5>
+
                         
                                 <td><a class="btn btn-primary form-control" href="{{route('penggajian.show',$penggajians->id)}}">Lihat</a></td>
                                      <td>{!!Form::open(['method'=>'DELETE','route'=>['penggajian.destroy',$penggajians->id]])!!}
-                                    {!!Form::submit('Delete',['class'=>'btn btn-danger col-md-12'])!!}</td>
+                                    {!!Form::submit('Delete',['class'=>'btn btn-danger col-md-12'])!!}
+                                    </td>
+                                    <td> <div>
+
+                                    <a class="btn btn-primary" href="{{route('penggajian.edit',$penggajians->id)}}">Ubah Pengambilan</a>
+
+                                </div>
+</td>
                                     {!!Form::close()!!}
                                 
                         </center>
